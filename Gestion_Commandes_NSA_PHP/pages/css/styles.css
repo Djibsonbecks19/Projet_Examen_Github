@@ -1,0 +1,142 @@
+#navbarNav{
+  float: right;
+}
+.iibs-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+  
+  .iibs-login-card {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .iibs-login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  }
+  
+  .iibs-login-card .card-header {
+    height: 8px;
+    background: linear-gradient(90deg, #1a237e 0%, #283593 100%);
+  }
+  
+  .iibs-login-card .card-body {
+    padding: 2.5rem;
+  }
+  
+  .iibs-login-card h1 {
+    color: #1a237e;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 0.75rem;
+  }
+  
+  .iibs-login-card h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: #ffca28;
+    border-radius: 3px;
+  }
+  
+  .iibs-login-card .alert-danger {
+    background-color: #ffebee;
+    color: #c62828;
+    border-left: 4px solid #ef5350;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .iibs-login-card label {
+    display: block;
+    color: #455a64;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .iibs-login-card .form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    background-color: #f9fafc;
+    transition: all 0.3s ease;
+  }
+  
+  .iibs-login-card .form-control:focus {
+    outline: none;
+    border-color: #1a237e;
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.1);
+  }
+  
+  .iibs-login-card .btn-success {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    box-shadow: 0 4px 6px rgba(26, 35, 126, 0.2);
+    width: 100%;
+  }
+  
+  .iibs-login-card .btn-success:hover {
+    background: linear-gradient(135deg, #283593 0%, #1a237e 100%);
+    box-shadow: 0 6px 8px rgba(26, 35, 126, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  .iibs-login-card .btn-success:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(26, 35, 126, 0.2);
+  }
+  
+  @media (max-width: 576px) {
+    .iibs-login-card .card-body {
+      padding: 1.5rem;
+    }
+    
+    .iibs-login-card h1 {
+      font-size: 1.5rem;
+    }
+    
+    .iibs-login-card .form-control {
+      padding: 0.6rem 0.8rem;
+    }
+    
+    .iibs-login-card .btn-success {
+      padding: 0.6rem 1.2rem;
+    }
+  }
+
