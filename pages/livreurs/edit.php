@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $telephone = $_POST['telephone'];
 
     mysqli_query($conn, "UPDATE livreurs SET nom='$nom', prenom='$prenom', telephone='$telephone' WHERE id=$id");
-    header("Location: liste.php");
+    header("Location: index.php?action=listeLivreurs");
 }
 
 ?>

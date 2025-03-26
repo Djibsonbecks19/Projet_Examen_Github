@@ -53,18 +53,18 @@ $result = mysqli_query($conn, "SELECT c.*, u.nom, u.prenom, p.libelle AS produit
                                 <td><?= htmlspecialchars($commande['produit_nom']) ?></td> 
                                 <td><?= number_format($commande['montant_total'], 2) ?> FCFA</td> 
                                 <td>
-                                    <span class="badge badge-<?= getStatusBadgeClass($commande['statut']) ?>">
-                                        <?= htmlspecialchars($commande['statut']) ?>
+                                    <span class="badge text-bg-<?= getStatusBadgeClass($commande['statut']) ?>">
+                                        <?= $commande['statut'] ?>
                                     </span>
                                 </td>
                                 <td>
                                     <a href="index.php?action=viewCommande&id=<?= $commande['id'] ?>" class="btn btn-info btn-sm">
                                         <i class="bi bi-eye"></i> Voir
                                     </a>
-                                    <a href="index.php?action=editCommande&id=<?= $commande['id'] ?>" class="btn btn-warning btn-sm">
+                                    <a  <?= $_SESSION["role"] == 'client' ? "hidden" : ""  ?> href="index.php?action=editCommande&id=<?= $commande['id'] ?>" class="btn btn-warning btn-sm">
                                         <i class="bi bi-pencil"></i> Modifier
                                     </a>
-                                    <button onclick="confirmDelete('index.php?action=deleteCommande&id=<?= $commande['id'] ?>')" class="btn btn-danger btn-sm">
+                                    <button  <?= $_SESSION["role"] == 'client' ? "hidden" : ""  ?> onclick="confirmDelete('index.php?action=deleteCommande&id=<?= $commande['id'] ?>')" class="btn btn-danger btn-sm">
                                         <i class="bi bi-trash"></i> Supprimer
                                     </button>
                                 </td>
@@ -84,15 +84,15 @@ $result = mysqli_query($conn, "SELECT c.*, u.nom, u.prenom, p.libelle AS produit
 <?php
 function getStatusBadgeClass($statut) {
     switch ($statut) {
-        case 'En attente':
+        case 'en attente':
             return 'warning';
-        case 'Validée':
+        case 'validée':
             return 'success';
-        case 'Expédiée':
+        case 'expédiée':
             return 'info';
-        case 'Livrée':
+        case 'livrée':
             return 'primary';
-        case 'Annulée':
+        case 'annulée':
             return 'danger';
         default:
             return 'secondary';

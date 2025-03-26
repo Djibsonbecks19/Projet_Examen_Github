@@ -1,17 +1,23 @@
 <?php
+$sql = "SELECT * FROM roles";
+$roles = mysqli_query($conn, $sql);
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nom = htmlspecialchars($_POST['nom']);
     $prenom = htmlspecialchars($_POST['prenom']);
     $telephone = htmlspecialchars($_POST['telephone']);
     $adresse = htmlspecialchars($_POST['adresse']);
+    $role = htmlspecialchars($_POST['role']);
     $login = htmlspecialchars($_POST['login']);
     $password = htmlspecialchars($_POST['password']);
 
     $sql = "INSERT INTO utilisateurs (nom, prenom, telephone, adresse, role, login, password)
-            VALUES ('$nom', '$prenom', '$telephone', '$adresse', 'client', '$login', '$password')";
+            VALUES ('$nom', '$prenom', '$telephone', '$adresse', '$role', '$login', '$password')";
 
     if (mysqli_query($conn, $sql)) {
         $successMessage = "Client ajouté avec succès !";
+        sleep(3);
+        header("Location: index.php?action=listeClients");
     } else {
         $errorMessage = "Erreur lors de l'ajout du client.";
     }
@@ -56,6 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="mb-3">
                     <label class="form-label">Adresse:</label>
                     <input type="text" name="adresse" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Roles:</label>
+                    <select for="role" name="role" class="form-select">
+                    <?php while($row = mysqli_fetch_assoc($roles)) { ?>
+                        <option type="text" class="form-control" value="<?= $row["libelle"] ?>" required><?= $row["libelle"] ?></option>
+                    <?php } ?>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Login:</label>

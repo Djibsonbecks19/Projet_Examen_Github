@@ -44,10 +44,10 @@ $result = mysqli_query($conn, $sql);
                                     <a href="index.php?action=viewPaiement&id=<?= $row['id'] ?>" class="btn btn-info btn-sm">
                                         <i class="bi bi-eye"></i> Voir
                                     </a>
-                                    <a href="index.php?action=editPaiement&id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">
+                                    <a  <?= $_SESSION["role"] == 'client' ? "hidden" : ""  ?> href="index.php?action=editPaiement&id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">
                                         <i class="bi bi-pencil"></i> Modifier
                                     </a>
-                                    <button onclick="confirmDelete('index.php?action=deletePaiement&id=<?= $row['id'] ?>')" class="btn btn-danger btn-sm">
+                                    <button  <?= $_SESSION["role"] == 'client' ? "hidden" : ""  ?> onclick="confirmDelete('index.php?action=deletePaiement&id=<?= $row['id'] ?>')" class="btn btn-danger btn-sm">
                                         <i class="bi bi-trash"></i> Supprimer
                                     </button>
                                 </td>

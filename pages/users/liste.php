@@ -1,5 +1,5 @@
 <?php
-$result = mysqli_query($conn, "SELECT * FROM utilisateurs WHERE role='client'");
+$result = mysqli_query($conn, "SELECT * FROM utilisateurs ");
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +36,8 @@ $result = mysqli_query($conn, "SELECT * FROM utilisateurs WHERE role='client'");
                             <th>Prénom</th>
                             <th>Téléphone</th>
                             <th>Adresse</th>
+                            <th>Rôle</th>
+                            <th>Photo</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -46,6 +48,15 @@ $result = mysqli_query($conn, "SELECT * FROM utilisateurs WHERE role='client'");
                                 <td><?= htmlspecialchars($client['prenom']) ?></td>
                                 <td><?= htmlspecialchars($client['telephone']) ?></td>
                                 <td><?= htmlspecialchars($client['adresse']) ?></td>
+                                <td><?= htmlspecialchars($client['role']) ?></td>
+                                <td>
+                                    <?php if($client['pp']) {?>
+                                        <img src="<?= $client['pp']?>" width="50" height="50" class="rounded-circle border">
+                                    <?php } else { 
+                                        echo "Aucune photo";
+                                    }
+                                    ?>
+                                </td>
                                 <td>
                                     <a href="index.php?action=viewClient&id=<?= $client['id'] ?>" class="btn btn-info btn-sm">
                                         <i class="bi bi-eye"></i> Voir

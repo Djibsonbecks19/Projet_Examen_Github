@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $statut = $_POST['statut'];
     $date_commande = date('Y-m-d H:i:s'); 
 
-    // Fetch the selected product details to get the prix_unitaire
     $produit_result = mysqli_query($conn, "SELECT * FROM produits WHERE id = '$produit_id'");
     $produit = mysqli_fetch_assoc($produit_result);
     
@@ -25,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
-
 <div class="container mt-5 mb-5">
     <div class="card shadow-lg border-0">
         <div class="card-header bg-primary text-white text-center">
@@ -33,26 +31,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <div class="card-body">
             <form method="POST">
-                <div class="mb-3">
-                    <label for="client_id" class="form-label">Client:</label>
-                    <select name="client_id" id="client_id" class="form-select" required>
-                        <option value="" disabled selected>Choisir un client</option>
-                        <?php
-                        // Displaying clients
-                        $clients = mysqli_query($conn, "SELECT * FROM utilisateurs WHERE role='client'");
-                        while ($client = mysqli_fetch_assoc($clients)) {
-                            echo "<option value='{$client['id']}'>{$client['nom']} {$client['prenom']}</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
+                <?php if ($_SESSION['role'] == 'client'){ ?>
+                    <input type="hidden" name="client_id" value="<?= $_SESSION['id'] ?>">
+                <?php } else { ?>
+                    <div class="mb-3">
+                        <label for="client_id" class="form-label">Client:</label>
+                        <select name="client_id" id="client_id" class="form-select" required>
+                            <option value="" disabled selected>Choisir un client</option>
+                            <?php while ($client = mysqli_fetch_assoc($clients)): ?>
+                                <option value="<?= $client['id'] ?>"><?= htmlspecialchars($client['nom'] . ' ' . $client['prenom']) ?></option>
+                            <?php endwhile; ?>
+                        </select>
+                    </div>
+                <?php }  ?>
 
                 <div class="mb-3">
                     <label for="produit_id" class="form-label">Produit:</label>
                     <select name="produit_id" id="produit_id" class="form-select" required>
                         <option value="" disabled selected>Choisir un produit</option>
                         <?php
-                        // Displaying products
                         $produits = mysqli_query($conn, "SELECT * FROM produits");
                         while ($produit = mysqli_fetch_assoc($produits)) {
                             echo "<option value='{$produit['id']}'>{$produit['libelle']}</option>";
@@ -69,11 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="mb-3">
                     <label for="statut" class="form-label">Statut:</label>
                     <select name="statut" id="statut" class="form-select" required>
-                        <option value="En attente">En attente</option>
-                        <option value="Validée">Validée</option>
-                        <option value="Expédiée">Expédiée</option>
-                        <option value="Livrée">Livrée</option>
-                        <option value="Annulée">Annulée</option>
+                        <option class="badge text-bg-secondary" value="En attente">En attente</option>
+                        <option class="badge text-bg-primary" value="Validée">Validée</option>
+                        <option class="badge text-bg-warning" value="Expédiée">Expédiée</option>
+                        <option class="badge text-bg-success" value="Livrée">Livrée</option>
+                        <option class="badge text-bg-danger" value="Annulée">Annulée</option>
                     </select>
                 </div>
 
